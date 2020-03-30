@@ -76,6 +76,15 @@ The `class_name` property refers to the type of object detected within the chose
 
 ---
 
+# TLDR; Quickstart
+ If you want, you can use this in a single step using the DockerHub registry:
+
+ ```
+ docker run -d -p 8080:8080 --name tf-object-detector triedeti/tf-object-detector
+```
+
+---
+
 ## Quickstart
 
  - Clone or download this repo onto your machine;
