@@ -4,7 +4,14 @@
 
 </a>
 
+[![Forks](https://img.shields.io/github/forks/triedeti/tf-object-detector.svg)](https://github.com/triedeti/tf-object-detector/network/members)
+[![Stars](https://img.shields.io/github/stars/triedeti/tf-object-detector.svg)](https://github.com/triedeti/tf-object-detector/stargazers)
+[![Issues](https://img.shields.io/github/issues/triedeti/tf-object-detector.svg)](https://github.com/triedeti/tf-object-detector/issues)
+[![License](https://img.shields.io/github/license/triedeti/tf-object-detector.svg)](https://github.com/triedeti/tf-object-detector/blob/master/LICENSE)
+
 > A small component for you to start processing images and recognizing their content. Based on the amazing work by https://github.com/webrtcHacks/tfObjWebrtc
+
+
 
 
 [![AppGif](https://github.com/triedeti/tf-object-detector/blob/master/docs/img/object_detector.gif?raw=true)]()
@@ -77,7 +84,10 @@ The `class_name` property refers to the type of object detected within the chose
 ---
 
 # TLDR; Quickstart
- If you want, you can use this in a single step using the DockerHub registry:
+
+[![dockeri.co](https://dockeri.co/image/triedeti/tf-object-detector)](https://hub.docker.com/r/triedeti/tf-object-detector)
+
+If you want, you can use this in a single step using the DockerHub registry:
 
  ```
  docker run -d -p 8080:8080 --name tf-object-detector triedeti/tf-object-detector
