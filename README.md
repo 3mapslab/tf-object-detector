@@ -9,6 +9,20 @@
 
 [![AppGif](https://github.com/triedeti/tf-object-detector/blob/master/docs/img/object_detector.gif?raw=true)]()
 
+## Disclaimer
+
+This is our effort to dockerize the work done by https://github.com/webrtcHacks/tfObjWebrtc maintaining most of the original code. 
+_So why didn't we use his server image? (or better yet: why did we create this image in the first place?):_
+ 
+ - We included waitress to mediate requests to the flask API;
+ - We forced all working versions of python packages, base images and so on, to keep this as stable as possible;
+ - We turned this into a self-contained (micro)service so that you can use it in your architecture without any hussle;
+ - You can even modify or add things to the base docker image, to tune it further if you would like;
+ - Open source the full code,  `Dockerfile` included;
+ - Removed sample code from within the flask api;
+
+It was our sole intention to contribute to the community what we had to do to get this to work on our own projects :heart: 
+
 As you can see here, object detection runs in realtime returning a JSON of the objects detected in each frame. You simply have to post an image to the service and it will return something like this:
 
 ```javascript
