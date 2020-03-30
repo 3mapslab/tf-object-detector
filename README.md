@@ -56,7 +56,7 @@ The `class_name` property refers to the type of object detected within the chose
 - [Quickstart](#quickstart)
 - [Prerequisites](#prerequisites)
 - [Contributing](#contributing)
-- [Team](#team)
+- [Contributors](#contributors)
 - [Support](#support)
 - [License](#license)
 
