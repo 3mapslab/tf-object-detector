@@ -47,4 +47,4 @@ def image():
         objects = object_detection_api.get_objects(image_object, threshold)
         return Response(response=objects,status=200,mimetype="application/json")
     except Exception as e:
-        return Response(response=json.dumps({error:e},indent=4, sort_keys=True, default=str),status=500,mimetype="application/json")
+        return Response(response=json.dumps({'error':e},indent=4, sort_keys=True, default=str),status=500,mimetype="application/json")
