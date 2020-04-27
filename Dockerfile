@@ -1,5 +1,5 @@
 # https://towardsdatascience.com/object-detection-with-10-lines-of-code-d6cb4d86f606
-FROM tensorflow/tensorflow:1.15.2-py3
+FROM tensorflow/tensorflow:1.15.0-py3
 
 ENV DEBIAN_FRONTEND noninteractive
 
