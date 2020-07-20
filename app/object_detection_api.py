@@ -64,7 +64,7 @@ class Object(object):
     def toJSON(self):
         return json.dumps(self.__dict__)
 
-def get_objects(image, threshold=0.5):
+def get_objects(image, threshold=0.5, target_class=None):
   image_np = load_image_into_numpy_array(image)
   # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
   image_np_expanded = np.expand_dims(image_np, axis=0)
@@ -76,6 +76,17 @@ def get_objects(image, threshold=0.5):
   classes = np.squeeze(classes).astype(np.int32)
   scores = np.squeeze(scores)
   boxes = np.squeeze(boxes)
+
+  if target_class is not None:
+      target_index = category_index.index(target_class);
+
+      # Getting the indices of the objects where there was a detection of the target class found
+      indices = np.argwhere(classes == target_index)
+    
+      # Filtering out the results that were not found to be of the target class
+      classes = np.squeeze(classes[indices])
+      scores = np.squeeze(scores[indices])
+      boxes = np.squeeze(boxes[indices])
 
   output = []
 
