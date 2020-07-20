@@ -45,6 +45,13 @@ def image():
         # Get the target object class to be detected
         target_class = request.form.get('target_class')
 
+        log.setLevel(logging.INFO)
+        
+        log.log(" ==== Initiating image detection ==== ")
+        log.log(" Threshold %s \n Target class: %s \n" % (threshold, target_class))
+        
+        log.setLevel(logging.ERROR)
+        
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, threshold, target_class)
