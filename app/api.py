@@ -58,6 +58,12 @@ def image():
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, threshold, target_class)
-        return Response(response=objects,status=200,mimetype="application/json")
+
+        response = {
+            'target_class': target_class,
+            'class_target': class_target,
+            'objects': objects}
+
+        return Response(response=json.dumps(response, indent=4, sort_keys=True, default=str),status=200,mimetype="application/json")
     except Exception as e:
         return Response(response=json.dumps({'error':e},indent=4, sort_keys=True, default=str),status=500,mimetype="application/json")
