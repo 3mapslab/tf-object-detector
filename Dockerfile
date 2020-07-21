@@ -49,4 +49,4 @@ ENV PYTHONPATH "${PYTHONPATH}:/object_detection/models/research/slim"
 
 EXPOSE 8080
 
-CMD python /app/waiter.py
+CMD python -u /app/waiter.py
