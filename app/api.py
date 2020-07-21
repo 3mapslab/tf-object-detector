@@ -35,6 +35,9 @@ def image():
     try:
         image_file = request.files['image']  # get the image
 
+        print("PRINT => Retrieving image: %s" % image_file)
+        log.log("LOG => Retrieving image: %s" % image_file)
+
         # Set an image confidence threshold value to limit returned data
         threshold = request.form.get('threshold')
         if threshold is None:
@@ -42,15 +45,15 @@ def image():
         else:
             threshold = float(threshold)
 
-        # Get the target object class to be detected
-        target_class = request.form.get('target_class')
+        class_target = request.form.get('target_class')
+        print("PRINT => Retrieving target class from form: %s" % class_target)
+        log.log("LOG => Retrieving target class from form: %s" % class_target)
 
-        log.setLevel(logging.INFO)
+        # Get the target object class to be detected
+        target_class = request.headers['target_class']
         
-        log.log(" ==== Initiating image detection ==== ")
-        log.log(" Threshold %s \n Target class: %s \n" % (threshold, target_class))
-        
-        log.setLevel(logging.ERROR)
+        print("PRINT => Retrieving target class from header: %s" % target_class)
+        log.log("LOG => Retrieving target class from header: %s" % target_class)
         
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
