@@ -45,25 +45,19 @@ def image():
         else:
             threshold = float(threshold)
 
-        class_target = request.form.get('target_class')
-        print("PRINT => Retrieving target class from form: %s" % class_target, flush=True)
-        log.log("LOG => Retrieving target class from form: %s" % class_target)
-
         # Get the target object class to be detected
-        target_class = request.headers['target_class']
-        
-        print("PRINT => Retrieving target class from header: %s" % target_class, flush=True)
-        log.log("LOG => Retrieving target class from header: %s" % target_class)
-        
+        if request.headers.get('target_class'):
+            target_class = request.headers.get('target_class')
+            # target_class = request.headers['target_class']
+
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, threshold, target_class)
+        
+        response = Response(response=objects,status=200,mimetype="application/json")
 
-        response = {
-            'target_class': target_class,
-            'class_target': class_target,
-            'objects': objects}
+        response.headers['response_target_class'] = target_class
 
-        return Response(response=json.dumps(response, indent=4, sort_keys=True, default=str),status=200,mimetype="application/json")
+        return response
     except Exception as e:
         return Response(response=json.dumps({'error':e},indent=4, sort_keys=True, default=str),status=500,mimetype="application/json")
