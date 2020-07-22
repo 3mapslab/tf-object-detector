@@ -102,5 +102,6 @@ def get_objects(image, threshold=0.5, target_class=None):
           item.height = float(boxes[c][2].item())
           item.width = float(boxes[c][3].item())
           output.append(item)
+  
   outputJson = json.dumps([ob.__dict__ for ob in output], indent=4, sort_keys=True, default=str)
   return outputJson
