@@ -49,7 +49,7 @@ def image():
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, threshold, target_class)
         
-        response = Response(response={'response_target_class':target_class,'objects':objects},status=200,mimetype="application/json")
+        response = Response(response={'target_class':target_class,'objects':objects},status=200,mimetype="application/json")
 
         return response
     except Exception as e:
