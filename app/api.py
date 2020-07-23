@@ -43,7 +43,9 @@ def image():
             threshold = float(threshold)
 
         # Get the target object class to be detected (alternative: request.headers['target_class'])
-        target_class = request.headers.get('target_class') if request.headers.get('target_class') else None
+        target_class = request.form.get('target_class')
+
+        raise Exception('target_class', target_class)
 
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
