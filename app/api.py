@@ -45,7 +45,7 @@ def image():
         # Get the target object class to be detected (alternative: request.headers['target_class'])
         target_class = request.form.get('target_class')
 
-        raise Exception('target_class', target_class)
+        raise Exception('target_class => {}'.format(target_class))
 
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
