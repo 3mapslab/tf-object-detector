@@ -78,15 +78,21 @@ def get_objects(image, target_class, threshold=0.5):
   boxes = np.squeeze(boxes)
 
   if target_class is not None:
-      target_index = category_index.index(target_class);
+      target_index = None
+      
+      for line in category_index.values():
+          if line['name'] == target_class: 
+            target_index = line['id']
+            break
 
-      # Getting the indices of the objects where there was a detection of the target class found
-      indices = np.argwhere(classes == target_index)
-    
-      # Filtering out the results that were not found to be of the target class
-      classes = np.squeeze(classes[indices])
-      scores = np.squeeze(scores[indices])
-      boxes = np.squeeze(boxes[indices])
+      if target_index is not None:
+          # Getting the indices of the objects where there was a detection of the target class found
+          indices = np.argwhere(classes == target_index)
+        
+          # Filtering out the results that were not found to be of the target class
+          classes = np.squeeze(classes[indices])
+          scores = np.squeeze(scores[indices])
+          boxes = np.squeeze(boxes[indices])
 
   output = []
 

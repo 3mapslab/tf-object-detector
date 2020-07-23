@@ -5,9 +5,9 @@ from flask import Flask, request, Response
 import json
 from datetime import datetime
 
-import logging
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+#import logging
+#log = logging.getLogger('werkzeug')
+#log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 
@@ -45,15 +45,11 @@ def image():
         # Get the target object class to be detected (alternative: request.headers['target_class'])
         target_class = request.form.get('target_class')
 
-        raise Exception('target_class => {}'.format(target_class))
-
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, target_class, threshold)
-        
-        response_target_class = target_class if target_class is not None else 'No Target Class Defined'
 
-        json_output = json.dumps({'response_target_class':response_target_class,'objects':objects},indent=4, sort_keys=True, default=str)
+        json_output = json.dumps(objects,indent=4, sort_keys=True, default=str)
 
         response = Response(response=json_output,status=200,mimetype="application/json")
         return response
