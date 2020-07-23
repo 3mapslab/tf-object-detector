@@ -47,12 +47,13 @@ def image():
 
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
-        objects = object_detection_api.get_objects(image_object, threshold, target_class)
+        objects = object_detection_api.get_objects(image_object, target_class, threshold)
         
         response_target_class = target_class if target_class is not None else 'No Target Class Defined'
 
-        response = Response(response=json.dumps({'response_target_class':response_target_class,'objects':objects},indent=4, sort_keys=True, default=str),status=200,mimetype="application/json")
+        json_output = json.dumps({'response_target_class':response_target_class,'objects':objects},indent=4, sort_keys=True, default=str)
 
+        response = Response(response=json_output,status=200,mimetype="application/json")
         return response
     except Exception as e:
         return Response(response=json.dumps({'error':e},indent=4, sort_keys=True, default=str),status=500,mimetype="application/json")

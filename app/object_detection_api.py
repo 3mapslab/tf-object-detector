@@ -64,7 +64,7 @@ class Object(object):
     def toJSON(self):
         return json.dumps(self.__dict__)
 
-def get_objects(image, threshold=0.5, target_class=None):
+def get_objects(image, target_class, threshold=0.5):
   image_np = load_image_into_numpy_array(image)
   # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
   image_np_expanded = np.expand_dims(image_np, axis=0)
@@ -103,5 +103,7 @@ def get_objects(image, threshold=0.5, target_class=None):
           item.width = float(boxes[c][3].item())
           output.append(item)
   
-  outputJson = json.dumps([ob.__dict__ for ob in output], indent=4, sort_keys=True, default=str)
-  return outputJson
+#   outputJson = json.dumps([ob.__dict__ for ob in output], indent=4, sort_keys=True, default=str)
+
+  result = [ob.__dict__ for ob in output]
+  return result
