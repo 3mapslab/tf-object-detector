@@ -76,7 +76,9 @@ def get_objects(image, target_class, threshold=0.5):
   classes = np.squeeze(classes).astype(np.int32)
   scores = np.squeeze(scores)
   boxes = np.squeeze(boxes)
-
+  
+  return target_class
+  
   if target_class is not None:
       target_ids = []
       
@@ -101,7 +103,7 @@ def get_objects(image, target_class, threshold=0.5):
 
           # Get distinct indices (in cases where the detection found more than one of the target classes)
           unique_indices = list(set(flattened_list))                  # Removing the duplicate indices with the set
-          unique_indices = np.array([[el] for el in unique_indices])  # Changing the list format into a list of lists, as is returned from the numpy argwhere function
+          #unique_indices = np.array([[el] for el in unique_indices])  # Changing the list format into a list of lists, as is returned from the numpy argwhere function
           
           # Filtering out the results that were not found to be of the target class
           classes = np.squeeze(classes[unique_indices])
