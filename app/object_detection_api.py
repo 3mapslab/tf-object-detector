@@ -84,9 +84,8 @@ def get_objects(image, target_class, threshold=0.5):
       
       for line in category_index.values():
           if line['name'] in target_list: 
-            target_ids.append(line['id'])
-            break
-
+              target_ids.append(line['id'])
+      
       if len(target_ids) > 0:
           list_indices = []
 
