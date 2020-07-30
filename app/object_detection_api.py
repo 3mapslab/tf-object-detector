@@ -77,8 +77,6 @@ def get_objects(image, target_class, threshold=0.5):
   scores = np.squeeze(scores)
   boxes = np.squeeze(boxes)
   
-  return target_class
-  
   if target_class is not None:
       target_ids = []
       
