@@ -78,21 +78,35 @@ def get_objects(image, target_class, threshold=0.5):
   boxes = np.squeeze(boxes)
 
   if target_class is not None:
-      target_index = None
+      target_ids = []
+      
+      target_list = target_class.split(',')
       
       for line in category_index.values():
-          if line['name'] == target_class: 
-            target_index = line['id']
+          if line['name'] in target_list: 
+            target_ids.append(line['id'])
             break
 
-      if target_index is not None:
-          # Getting the indices of the objects where there was a detection of the target class found
-          indices = np.argwhere(classes == target_index)
-        
+      if len(target_ids) > 0:
+          list_indices = []
+
+          # Getting the indices of the objects where there was a detection of at least one of the target classes
+          for target_id in target_ids:
+              list_indices = list_indices + np.argwhere(classes == target_id).tolist()
+
+          flatten = lambda list_of_lists: [item for sublist in list_of_lists for item in sublist] # lambda function that converts a lsit of lists into a single-dimension list
+          
+          # Flattening the list to enable the removal of duplicate indices
+          flattened_list = flatten(list_indices)
+
+          # Get distinct indices (in cases where the detection found more than one of the target classes)
+          unique_indices = list(set(flattened_list))                  # Removing the duplicate indices with the set
+          unique_indices = np.array([[el] for el in unique_indices])  # Changing the list format into a list of lists, as is returned from the numpy argwhere function
+          
           # Filtering out the results that were not found to be of the target class
-          classes = np.squeeze(classes[indices])
-          scores = np.squeeze(scores[indices])
-          boxes = np.squeeze(boxes[indices])
+          classes = np.squeeze(classes[unique_indices])
+          scores = np.squeeze(scores[unique_indices])
+          boxes = np.squeeze(boxes[unique_indices])
 
   output = []
 
